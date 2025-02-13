@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "message_fastapi_project"
+version = "0.1.0"
+description = 'A Python Polylith example code repo'
+authors = [{ name = "David Vujic" }]
+requires-python = ">=3.8"
+
+[tool.polylith.bricks]
+"../../bases/example/message_api" = "example/message_api"
+"../../components/example/database" = "example/database"
+"../../components/example/dictionaries" = "example/dictionaries"
+"../../components/example/log" = "example/log"
+"../../components/example/message" = "example/message"
+"../../components/example/kafka" = "example/kafka"
+"../../components/example/schema" = "example/schema"
+
+[tool.pixi.tasks]
+start = "uvicorn example.message_api.core:app --host 0.0.0.0 --port 8000"
+
+[tool.pixi.workspace]
+channels = [
+    "https://prefix.dev/pixi-build-backends",
+    "https://prefix.dev/conda-forge",
+]
+platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
+preview = ["pixi-build"]
+
+[tool.pixi.pypi-dependencies]
+polylith-cli = ">=1.26.0,<2"
+
+[tool.pixi.package]
+name = "message_fastapi_project"
+version = "0.1.0"
+
+[tool.pixi.package.build]
+backend = { name = "pixi-build-python", version = "0.1.*" }
+
+[tool.pixi.package.host-dependencies]
+hatchling = "==1.26.3"
+
+[tool.pixi.package.run-dependencies]
+python-confluent-kafka = "~=2.3.0"
+fastapi = "~=0.109.2"
+uvicorn = "~=0.25.0"
+sqlalchemy = "~=2.0.23"
+
+[tool.hatch.build.targets.wheel]
+packages = ["example"]

@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "my_aws_lambda_project"
+version = "1.1.1"
+description = 'A Python Polylith example code repo'
+authors = [{ name = "David Vujic" }]
+requires-python = ">=3.8"
+
+[tool.polylith.bricks]
+"../../bases/example/greet_aws_lambda" = "example/greet_aws_lambda"
+"../../components/example/greeting" = "example/greeting"
+"../../components/example/log" = "example/log"
+
+[tool.pixi.tasks]
+deploy = "serverless deploy"
+invoke = "serverless invoke --function hello"
+local_invoke = "serverless invoke local --function hello"
+
+[tool.pixi.workspace]
+channels = [
+    "https://prefix.dev/pixi-build-backends",
+    "https://prefix.dev/conda-forge",
+]
+platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
+preview = ["pixi-build"]
+
+[tool.pixi.pypi-dependencies]
+polylith-cli = ">=1.26.0,<2"
+
+[tool.pixi.package]
+name = "my_aws_lambda_project"
+version = "1.1.1"
+
+[tool.pixi.package.build]
+backend = { name = "pixi-build-python", version = "0.1.*" }
+
+[tool.pixi.package.host-dependencies]
+hatchling = "==1.26.3"
+
+[tool.hatch.build.targets.wheel]
+packages = ["example"]

@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "consumer_project"
+version = "0.1.0"
+description = 'A Python Polylith example code repo'
+authors = [{ name = "David Vujic" }]
+requires-python = ">=3.8"
+
+[project.scripts]
+consumer = "my_custom_ns.example.consumer.core:main"
+
+[tool.polylith.build]
+top-namespace = "my_custom_ns"
+
+[tool.polylith.bricks]
+"../../bases/example/consumer" = "example/consumer"
+"../../components/example/log" = "example/log"
+"../../components/example/kafka" = "example/kafka"
+
+[tool.pixi.workspace]
+channels = [
+    "https://prefix.dev/pixi-build-backends",
+    "https://prefix.dev/conda-forge",
+]
+platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
+preview = ["pixi-build"]
+
+[tool.pixi.pypi-dependencies]
+polylith-cli = ">=1.26.0,<2"
+
+[tool.pixi.package]
+name = "my_custom_ns"
+version = "0.1.0"
+
+[tool.pixi.package.build]
+backend = { name = "pixi-build-python", version = "0.1.*" }
+
+[tool.pixi.package.host-dependencies]
+hatchling = "==1.26.3"
+
+[tool.pixi.package.run-dependencies]
+python-confluent-kafka = "~=2.3.0"
+
+[tool.hatch.build.targets.wheel]
+packages = ["my_custom_ns"]

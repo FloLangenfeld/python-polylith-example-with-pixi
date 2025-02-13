@@ -1,0 +1,16 @@
+.DS_Store
+
+.mypy_cache
+.venv
+__pycache__
+
+.serverless
+node_modules
+
+dist
+
+sql_app.db
+
+# pixi environments
+.pixi
+*.egg-info

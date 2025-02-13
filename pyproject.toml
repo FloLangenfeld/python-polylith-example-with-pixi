@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "python-polylith-example-with-pixi"
+version = "0.1.0"
+description = 'A Python Polylith example code repo'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [{ name = "David Vujic" }]
+dependencies = ["functions-framework~=3.5.0"]
+
+[tool.hatch.build]
+dev-mode-dirs = ["components", "bases", "development", "."]
+
+[tool.polylith.bricks]
+"bases/example/message_api" = "example/message_api"
+"bases/example/consumer" = "example/consumer"
+"bases/example/greet_api" = "example/greet_api"
+"bases/example/greet_gcp_function" = "example/greet_gcp_function"
+"bases/example/greet_aws_lambda" = "example/greet_aws_lambda"
+"components/example/message" = "example/message"
+"components/example/dictionaries" = "example/dictionaries"
+"components/example/greeting" = "example/greeting"
+"components/example/database" = "example/database"
+"components/example/schema" = "example/schema"
+"components/example/log" = "example/log"
+"components/example/kafka" = "example/kafka"
+
+[tool.isort]
+profile = "black"
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
+
+[tool.pixi.pypi-dependencies]
+python-polylith-example-with-pixi = { path = ".", editable = true }
+
+[tool.pixi.tasks]
+
+[tool.pixi.dependencies]
+fastapi = "~=0.109.2"
+uvicorn = "~=0.25.0"
+sqlalchemy = "~=2.0.23"
+python-confluent-kafka = "~=2.3.0"
+python = "3.12.*"
+
+[tool.pixi.feature.dev.dependencies]
+black = "~=23.12.1"
+isort = "~=5.13.2"
+mypy = "~=1.8.0"
+pytest = "~=7.4.3"
+
+[tool.pixi.environments]
+dev = ["dev"]
+
+[dependency-groups]
+dev = ["polylith-cli"]
