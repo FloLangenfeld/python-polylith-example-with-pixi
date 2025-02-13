@@ -1,6 +1,6 @@
 # Python Polylith Example
 
-This is a repository with an example `Python` setup of the Polylith Architecture using `hatch`.
+This is a repository with an example `Python` setup of the Polylith Architecture using [`pixi`](https://pixi.sh/latest/).
 Here you will find examples of code being shared between different kind of projects, and the developer tooling setup.
 
 ## Developer experience
