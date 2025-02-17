@@ -21,9 +21,9 @@ Have a look at this repository for more information and documentation:
 ### Pixi
 Currently, the building of conda packages using [pixi](https://pixi.sh/latest/) is still considered experimental. Notably, the available `build-backends` are still missing a few features, for instance the ability to set the package namespace to an arbitrarily name, or to include specific source code from another folder. 
 
-A workaround is to copy the required bases and components into folder named after the chosen namespace, build the package using the `pixi build` command, and then remove the source code. These steps are done using the [`python-polylith`](https://github.com/DavidVujic/python-polylith) with the commands `poly build setup` and `poly build teardown` as in this Maturin [example](https://github.com/DavidVujic/python-polylith), respectively.
+A workaround is to copy the required bases and components into folder named after the chosen namespace, build the package using the `pixi build` command, and then remove the source code. These steps are done using the [`python-polylith`](https://github.com/DavidVujic/python-polylith) commands `poly build setup` and `poly build teardown` as in this Maturin [example](https://github.com/DavidVujic/python-polylith).
 
-This workflow (`pixi run poly build setup`, `pixi build` and `pixi run poly build teardown`) can be simplified with [`pixi` tasks](https://pixi.sh/latest/features/advanced_tasks/):
+This workflow (`pixi run poly build setup`, `pixi build` and `pixi run poly build teardown`) can be further simplified with [`pixi` tasks](https://pixi.sh/latest/features/advanced_tasks/):
 ```TOML
 [tool.pixi.tasks]
 setup = "poly build setup"
