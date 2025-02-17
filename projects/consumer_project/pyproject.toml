@@ -28,6 +28,12 @@ channels = [
 platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
 preview = ["pixi-build"]
 
+[tool.pixi.tasks]
+setup = "poly build setup"
+build = { cmd = ["pixi", "build"], depends-on = ["setup"] }
+teardown = { cmd = ["poly", "build", "teardown"], depends-on = ["build"] }
+package = { depends-on = ["setup", "build", "teardown"] }
+
 [tool.pixi.pypi-dependencies]
 polylith-cli = ">=1.26.0,<2"
 
